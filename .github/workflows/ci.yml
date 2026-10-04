@@ -1,0 +1,11 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make -j$(nproc)
+      - run: make test
+      - run: make tsan
+      - run: make system-test
